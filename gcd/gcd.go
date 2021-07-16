@@ -31,10 +31,10 @@ func main() {
 	if a0 > a1 {
 		a0, a1 = a1, a0
 	}
-	fmt.Printf("gcd of %d and %d is %d.", a0, a1, gcd(a0, a1))
+	fmt.Printf("gcd of %d and %d is %d.", a0, a1, Gcd(a0, a1))
 }
 
-func gcd(a0 int, a1 int) int {
+func Gcd(a0 int, a1 int) int {
 	surplus := a0 % a1
 	for surplus != 0 {
 		a0, a1 = a1, surplus
