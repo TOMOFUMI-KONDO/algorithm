@@ -1,4 +1,13 @@
-package subset_sum_slow
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"strings"
+)
 
 type YN string
 
@@ -6,6 +15,44 @@ const (
 	Y YN = "Yes"
 	N YN = "No"
 )
+
+func main() {
+	f, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	var scanned []string
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		scanned = append(scanned, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	var a []int
+	fmt.Print("a:")
+	for _, v := range strings.Fields(scanned[0]) {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			log.Fatal(err)
+		}
+		a = append(a, n)
+		fmt.Printf(" %d", n)
+	}
+	fmt.Println()
+	b, err := strconv.Atoi(scanned[1])
+	fmt.Printf("b: %d\n", b)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	yn, subset := SubsetSumSlow(a, b)
+	fmt.Printf("YN: %s\n", yn)
+	fmt.Printf("Subset: %v", subset)
+}
 
 func SubsetSumSlow(a []int, b int) (YN, []bool) {
 	lenA := len(a)

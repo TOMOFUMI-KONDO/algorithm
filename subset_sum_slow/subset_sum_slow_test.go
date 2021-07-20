@@ -1,4 +1,4 @@
-package subset_sum_slow
+package main
 
 import (
 	"reflect"
