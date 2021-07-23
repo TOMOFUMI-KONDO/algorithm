@@ -11,11 +11,13 @@ import (
 func main() {
 	V := []int{0, 1, 2, 3, 4}
 	E := [][3]int{{0, 1, 7}, {3, 4, 8}, {0, 4, 9}, {1, 4, 12}, {2, 4, 15}, {2, 3, 16}, {1, 2, 16}}
+	fmt.Printf("V: %v\n", V)
+	fmt.Printf("E: %v\n", E)
 	ans, err := Kruskal(V, E)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(ans)
+	fmt.Printf("MST is %v\n", ans)
 }
 
 func Kruskal(V []int, E [][3]int) ([][3]int, error) {
@@ -26,20 +28,17 @@ func Kruskal(V []int, E [][3]int) ([][3]int, error) {
 	}
 	sortByWeight(E)
 	for len(comp) > 1 {
-		//fmt.Printf("%v,%v\n", E, comp)
 		e := E[0]
 		i0, err := memberIdxHasN(comp, e[0])
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("i0:%w", err)
 		}
 		i1, err := memberIdxHasN(comp, e[1])
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("i0:%w", err)
 		}
-		//fmt.Printf("%d,%d\n", i0, i1)
-		//fmt.Printf("%v,%v\n", comp[i0], comp[i1])
 		if !reflect.DeepEqual(comp[i0], comp[i1]) {
-			merge(comp, i0, i1)
+			comp = merged(comp, i0, i1)
 			tree = append(tree, e)
 		}
 		E = E[1:]
@@ -62,10 +61,17 @@ func memberIdxHasN(comp [][]int, n int) (int, error) {
 	return -1, errors.New(fmt.Sprintf("[ERROR] %d not in %v", n, comp))
 }
 
-func merge(comp [][]int, i0 int, i1 int) {
-	v0 := comp[i0]
-	v1 := comp[i1]
-	comp = append(comp[:i0], comp[:i0+1]...)
-	comp = append(comp[:i1], comp[:i1+1]...)
-	comp = append(comp, append(v0, v1...))
+func merged(comp [][]int, i0 int, i1 int) [][]int {
+	var newComp [][]int
+	for i := range comp {
+		if i != i0 && i != i1 {
+			newComp = append(newComp, comp[i])
+		}
+	}
+	var c []int
+	c = append(c, comp[i0]...)
+	c = append(c, comp[i1]...)
+	newComp = append(newComp, c)
+
+	return newComp
 }
