@@ -8,12 +8,12 @@ func TestDijkstra(t *testing.T) {
 		edges []Edge
 		start Node
 	}{
-		{[]Node{"n1", "n2"}, []Edge{{"n1", "n2", 1}}, "n1"},
+		{[]Node{1, 2}, []Edge{{1, 2, 1}}, 1},
 	}
 
 	for _, test := range tests {
 		edges := Dijkstra(test.nodes, test.edges, test.start)
-		expected := []Edge{{"n1", "n2", 1}}
+		expected := []Edge{{1, 2, 1}}
 		if equal(edges, expected) {
 			t.Errorf("edges = %#v; want %#v", edges, test.edges)
 		}
