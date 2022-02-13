@@ -82,7 +82,6 @@ func Dijkstra(nodes []Node, edges []Edge, src Node, dst Node) []Edge {
 	var path []Edge
 	cur := dst
 	for {
-		fmt.Println(edgeToNode[cur])
 		path = append([]Edge{edgeToNode[cur]}, path...)
 		oppo := edgeToNode[cur].opposite(cur)
 		if oppo == src {
