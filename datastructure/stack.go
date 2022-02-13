@@ -1,12 +1,12 @@
-package main
+package datastructure
 
-type cell struct {
+type cellStack struct {
 	element int
-	next    *cell
+	next    *cellStack
 }
 
 type Stack struct {
-	init *cell
+	init *cellStack
 }
 
 func NewStack() *Stack {
@@ -14,7 +14,7 @@ func NewStack() *Stack {
 }
 
 func (s *Stack) Push(n int) {
-	c := &cell{element: n, next: s.init}
+	c := &cellStack{element: n, next: s.init}
 	s.init = c
 }
 
