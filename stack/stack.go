@@ -1,25 +1,24 @@
 package main
 
-type cell struct {
-	element int
-	next    *cell
+type element struct {
+	value int
+	next  *element
 }
 
 type Stack struct {
-	init *cell
+	top *element
 }
 
 func NewStack() *Stack {
-	return &Stack{init: nil}
+	return &Stack{top: nil}
 }
 
-func (s *Stack) Push(n int) {
-	c := &cell{element: n, next: s.init}
-	s.init = c
+func (s *Stack) Push(val int) {
+	s.top = &element{value: val, next: s.top}
 }
 
 func (s *Stack) Pop() int {
-	popped := s.init.element
-	s.init = s.init.next
+	popped := s.top.value
+	s.top = s.top.next
 	return popped
 }
