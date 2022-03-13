@@ -1,4 +1,4 @@
-package main
+package datastructure
 
 type element struct {
 	value int
