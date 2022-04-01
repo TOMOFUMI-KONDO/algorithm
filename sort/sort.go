@@ -1,3 +1,3 @@
 package sort
 
-type Sort func([]int)
+type Sort func(*[]int)
