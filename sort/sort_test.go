@@ -6,7 +6,7 @@ import (
 	alg "github.com/TOMOFUMI-KONDO/algorithm"
 )
 
-var sorts = []Sort{BubbleSort, QuickSort}
+var sorts = []Sort{BubbleSort, QuickSort, MergeSort}
 var tests = []struct {
 	in   []int
 	want []int
